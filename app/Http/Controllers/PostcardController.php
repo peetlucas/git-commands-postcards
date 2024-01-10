@@ -13,8 +13,13 @@ class PostcardController extends Controller
      */
     public function index()
     {
-         return view('postcards.index', [
-         'postcards' => Postcard::latest()->paginate(5)
+        $isDraft = 0;
+        return view('postcards.index', [
+         'postcards' => Postcard::latest()->filter(request(['search']))
+                    ->where('is_draft', '=', $isDraft)
+                    ->where((Carbon::parse(date('Y-m-d H:s:i', strtotime('online_at')))
+                    ->diffInSeconds(Carbon::parse(date('Y-m-d H:s:i', strtotime('offline_at'))), false)), '>=', '0')
+                    ->paginate(5)
         ]);   
     }
 
