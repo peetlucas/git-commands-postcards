@@ -13,11 +13,8 @@ class PostcardController extends Controller
      */
     public function index()
     {
-        $isDraft = 0;
-        return view('postcards.index', [
-         'postcards' => Postcard::latest()->filter(request(['search']))
-                    ->where('is_draft', '=', $isDraft)
-                    ->paginate(5)
+         return view('postcards.index', [
+         'postcards' => Postcard::latest()->paginate(5)
         ]);   
     }
 
