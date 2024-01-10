@@ -14,7 +14,9 @@ class PostcardController extends Controller
     public function index()
     {
          return view('postcards.index', [
-         'postcards' => Postcard::latest()->paginate(5)
+         'postcards' => Postcard::latest()
+         ->withTrashed()->get()
+         ->paginate(5)
         ]);   
     }
 
