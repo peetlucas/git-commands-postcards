@@ -27,6 +27,15 @@
                   <a href="#" class="text-sm font-medium text-gray-500 hover:text-gray-700">Home</a>
                 </div>
               </li>
+               @if(isset($postcards))
+                @if($postcards->currentPage() > 1)                        
+                  <link rel="prev" href="{{ $postcards->previousPageUrl() }}" />             
+                @endif
+                              
+                @if($postcards->hasMorePages())
+                  <link rel="next" href="{{ $postcards->nextPageUrl() }}" /> 
+                @endif
+              @endif 
             </ol>
           </nav>
           <h1 class="mt-2 text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">Postcards index</h1>
